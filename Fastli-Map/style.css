@@ -1,0 +1,89 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    height: 100vh; 
+    overflow: hidden;
+}
+
+#map{
+    height: calc(100vh - 100px);
+    width: 90%;
+    margin: 50px auto;
+    border: 5px solid #c52a39;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.custom-marker-wrapper {
+    /* Bu sınıf sadece Leaflet'e boyutu bildirir, animasyon burada olmamalı */
+    width: 30px !important;
+    height: 30px !important;
+}
+
+.animated-marker-inner {
+    background-color: #007bff;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 3px solid #ffffff;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    /* Animasyon artık sadece iç div'e uygulanıyor */
+    animation: bounce 1.5s infinite ease-in-out;
+}
+
+/* Tıklanılan İşaretçi için Stil */
+/* NOT: Active sınıfı artık iç div'e uygulanacak! */
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 15px rgba(0, 0, 0, 0.3);
+    }
+}
+
+.animated-marker-inner.active {
+    background-color: #dc3545;
+    animation: none;
+}
+
+.leaflet-popup-content-wrapper {
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.star-rating {
+    color: gold;
+    font-size: 1.2em;
+}
+
+@media (max-width: 768px) {
+    
+    /* Haritanın Etrafındaki Boşlukları Azaltma */
+    #map {
+        width: 96%; /* Küçük ekranlarda daha fazla yer kapla */
+        margin: 20px auto; /* Margin'i 50px'ten 20px'e düşür */
+        
+        /* Mobil Cihazlar için Yüksekliği Ayarlama */
+        height: calc(100vh - 40px); /* Toplam margin 40px (20px üst, 20px alt) çıkarıldı */
+        
+        /* Mobil için daha ince kenarlık ve radius */
+        border: 2px solid #343a40; 
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    }
+    
+    /* Popup'ı Mobil'de Daha Geniş Kullanma */
+    .leaflet-popup-content-wrapper {
+        max-width: 250px;
+    }
+}
